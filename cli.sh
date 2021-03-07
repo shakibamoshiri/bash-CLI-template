@@ -31,6 +31,11 @@ if [[ ${#} == 0 ]]; then
     _help;
 fi
 
+mapfile -t ARGS < <( perl -lne 'print $& while /--?[a-zA-Z][^-]*/ig' <<< "$@");
+if [[ ${#ARGS[@]} == 0 ]]; then
+    _help;
+fi
+
 function _os_call(){
     echo "_os_call";
     echo "flag: ${_os['flag']}";
@@ -49,7 +54,6 @@ function _port_call(){
     echo "args: ${_port['args']}";
 }
 
-mapfile -t ARGS < <( perl -lne 'print $& while /--?[a-zA-Z][^-]*/ig' <<< "$@");
 for arg in "${ARGS[@]}"; do
     # echo "arg: $arg";
     mapfile -t _options_ < <(echo "$arg" | tr ' ' '\n');
