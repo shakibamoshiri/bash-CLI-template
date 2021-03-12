@@ -6,6 +6,33 @@
 # 20XX (C) Shakiba Moshiri
 ################################################################################
 
+################################################################################
+# an associative array for storing color and a function for colorizing
+################################################################################
+declare -A _colors_;
+_colors_[ 'red' ]='\x1b[0;31m';
+_colors_[ 'green' ]='\x1b[0;32m';
+_colors_[ 'yellow' ]='\x1b[0;33m';
+_colors_[ 'cyan' ]='\x1b[0;36m';
+_colors_[ 'white' ]='\x1b[0;37m';
+_colors_[ 'reset' ]='\x1b[0m';
+
+function colorize(){
+    if [[ ${_colors_[ $1 ]} ]]; then
+        echo -e "${_colors_[ $1 ]}$2${_colors_[ 'reset' ]}";
+    else
+        echo 'wrong color name!';
+    fi
+}
+
+function print_title(){
+    echo $(colorize cyan "$@");
+}
+
+
+################################################################################
+# key-value array
+################################################################################
 declare -A _os;
 _os['flag']=0;
 _os['args']='';
