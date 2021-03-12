@@ -130,7 +130,7 @@ function _port_call(){
 
 for arg in "${ARGS[@]}"; do
     # echo "arg: $arg";
-    mapfile -t _options_ < <(echo "$arg" | tr ' ' '\n');
+    mapfile -t _options_ < <(tr ' ' '\n' <<< "$arg");
     # echo "'${_options_[0]}' =>  ${_options_[@]:1}"
 
     case ${_options_[0]} in
