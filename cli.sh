@@ -45,14 +45,54 @@ declare -A _port;
 _port['flag']=0;
 _port['args']='';
 
-function _help(){
-echo "
- --os      os commands
- --docker  Docker commands
- --port    Port commands
-"; 
-exit 0;
+
+################################################################################
+# __help function
+################################################################################
+function _os_help(){
+    echo -e  "
+ -O │ --os              OS actions
+    ├── $(colorize 'cyan' 'type')            show / check the name
+    ├── $(colorize 'cyan' 'version')         show / check the version
+    ├── $(colorize 'cyan' 'update')          update the OS
+    ├── $(colorize 'cyan' 'upgrade')         upgrade the OS
+    └── $(colorize 'cyan' 'info')            more info about OS ";
 }
+
+function _docker_help(){
+    echo -e "
+ -D │ --docker          docker actions
+    ├── $(colorize 'cyan' 'docker')          install docker
+    ├── $(colorize 'cyan' 'remove')          uninstall docker
+    ├── $(colorize 'cyan' 'compose')         install docker-compose
+    └── $(colorize 'cyan' 'kubectl')         install kubernetes CLI";
+}
+
+function _port_help(){
+    echo -e "
+ -P │ --port            manage firewall
+    ├── $(colorize 'cyan' 'stop')            stop all firewalls
+    ├── $(colorize 'cyan' 'start')           start all firewalls
+    ├── $(colorize 'cyan' 'disable')         disable all firewalls
+    ├── $(colorize 'cyan' 'enable')          enable all firewalls
+    └── $(colorize 'yellow' '<NUMBER>')        open this port number";
+}
+
+function _help(){
+    echo -e  " $0
+ -h │ --help            print this help
+
+$(_os_help)
+$(_docker_help)
+$(_port_help)
+
+Developer Shakiba Moshiri
+source    https://github.com/k-five/bash-CLI-template"
+
+    exit 0;
+}
+
+
 
 if [[ ${#} == 0 ]]; then
     _help;
