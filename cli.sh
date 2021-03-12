@@ -31,7 +31,14 @@ if [[ ${#} == 0 ]]; then
     _help;
 fi
 
-mapfile -t ARGS < <( perl -lne 'print $& while /--?[a-zA-Z][^-]*/ig' <<< "$@");
+# /--?[a-zA-Z][^-]*
+# this pattern does not work well when we have more dashes -
+#
+# new one non-group match
+# https://stackoverflow.com/questions/36754105/not-group-in-regex
+# (?:(?! -).)+
+# (?:(?! -)[\s\S])+
+mapfile -t ARGS < <( perl -lne 'print $& while /(?:(?! -)[\s\S])+/ig' <<< "$@");
 if [[ ${#ARGS[@]} == 0 ]]; then
     _help;
 fi
