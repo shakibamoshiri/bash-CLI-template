@@ -45,54 +45,51 @@ declare -A _port;
 _port['flag']=0;
 _port['args']='';
 
-
 ################################################################################
 # __help function
 ################################################################################
 function _os_help(){
-    echo -e  "
- -O │ --os              OS actions
-    ├── $(colorize 'cyan' 'type')            show / check the name
-    ├── $(colorize 'cyan' 'version')         show / check the version
-    ├── $(colorize 'cyan' 'update')          update the OS
-    ├── $(colorize 'cyan' 'upgrade')         upgrade the OS
-    └── $(colorize 'cyan' 'info')            more info about OS ";
+    printf "%-25s %s\n" "-O │ --os" "Os actions:";
+    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'type')" "show / check the name";
+    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'version')" "show / check the version";
+    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'update')" "update the OS";
+    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'info')" "more info about OS";
+
+    printf "%-40s %s\n" "   └── $(colorize 'cyan' 'info')" "more info about OS";
 }
 
 function _docker_help(){
-    echo -e "
- -D │ --docker          docker actions
-    ├── $(colorize 'cyan' 'docker')          install docker
-    ├── $(colorize 'cyan' 'remove')          uninstall docker
-    ├── $(colorize 'cyan' 'compose')         install docker-compose
-    └── $(colorize 'cyan' 'kubectl')         install kubernetes CLI";
+    printf "%-25s %s\n" "-D │ --docker" "docker actions";
+    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'install')" "install docker";
+    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'remove')" "uninstall docker";
+    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'compose')" "install docker-compose";
+
+    printf "%-40s %s\n" "   └── $(colorize 'cyan' 'kubectl')" "install kubernetes";
 }
 
 function _port_help(){
-    echo -e "
- -P │ --port            manage firewall
-    ├── $(colorize 'cyan' 'stop')            stop all firewalls
-    ├── $(colorize 'cyan' 'start')           start all firewalls
-    ├── $(colorize 'cyan' 'disable')         disable all firewalls
-    ├── $(colorize 'cyan' 'enable')          enable all firewalls
-    └── $(colorize 'yellow' '<NUMBER>')        open this port number";
+    printf "%-25s %s\n" "-P │ --port" "manage firewall";
+    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'stop')" "stop all firewalls";
+    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'start')" "start all firewalls";
+    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'disable')" "disable all firewalls";
+    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'enable')" "enable all firewalls";
+
+    printf "%-40s %s\n" "   └── $(colorize 'yellow' '<NUMBER>')" "open this port";
 }
 
 function _help(){
-    echo -e  " $0
- -h │ --help            print this help
-
-$(_os_help)
-$(_docker_help)
-$(_port_help)
-
-Developer Shakiba Moshiri
-source    https://github.com/k-five/bash-CLI-template"
-
+    printf "%-25s %s\n" "-h │ --help" "show / print help";
+    echo
+    echo "$(_os_help)"
+    echo
+    echo "$(_docker_help)"
+    echo
+    echo "$(_port_help)"
+    echo
+    echo "Developer Shakiba Moshiri"
+    echo "source    https://github.com/k-five/bash-CLI-template"
     exit 0;
 }
-
-
 
 if [[ ${#} == 0 ]]; then
     _help;
