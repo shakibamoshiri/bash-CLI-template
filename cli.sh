@@ -33,17 +33,24 @@ function print_title(){
 ################################################################################
 # key-value array
 ################################################################################
-declare -A _os;
-_os['flag']=0;
-_os['args']='';
+# Options which set attributes:
+#   -a	to make NAMEs indexed arrays (if supported)
+#   -A	to make NAMEs associative arrays (if supported)
+#   -i	to make NAMEs have the `integer' attribute
+#   -l	to convert the value of each NAME to lower case on assignment
+#   -n	make NAME a reference to the variable named by its value
+#   -r	to make NAMEs readonly
+#   -t	to make NAMEs have the `trace' attribute
+#   -u	to convert the value of each NAME to upper case on assignment
+#   -x	to make NAMEs export
+declare -i _os_flag=0;
+declare -a _os_args=();
 
-declare -A _docker;
-_docker['flag']=0;
-_docker['args']='';
+declare -i _docker_flag=0;
+declare -a _docker_args=();
 
-declare -A _port;
-_port['flag']=0;
-_port['args']='';
+declare -i _port_flag=0;
+declare -a _port_args=1;
 
 ################################################################################
 # __help function
@@ -108,42 +115,43 @@ if [[ ${#ARGS[@]} == 0 ]]; then
 fi
 
 function _os_call(){
-    echo "_os_call";
-    echo "flag: ${_os['flag']}";
-    echo "args: ${_os['args']}";
+    echo "*** _os_call ***";
+    echo "flag: $_os_flag";
+    echo "args: '${_os_args[*]}'";
+    echo "size: '${#_os_args[*]}'";
 }
 
 function _docker_call(){
-    echo "_docker_call";
-    echo "flag: ${_docker['flag']}";
-    echo "args: ${_docker['args']}";
+    echo "*** _docker_call ***";
+    echo "flag: $_docker_flag";
+    echo "args: '${_docker_args[*]}'";
+    echo "size: '${#_docker_args[*]}'";
 }
 
 function _port_call(){
-    echo "_port_call";
-    echo "flag: ${_port['flag']}";
-    echo "args: ${_port['args']}";
+    echo "*** _port_call ***";
+    echo "flag: $_port_flag";
+    echo "args: '${_port_args[*]}'";
+    echo "size: '${#_port_args[*]}'";
 }
 
 for arg in "${ARGS[@]}"; do
-    # echo "arg: $arg";
-    mapfile -t _options_ < <(tr ' ' '\n' <<< "$arg");
-    # echo "'${_options_[0]}' =>  ${_options_[@]:1}"
+    _options_=($arg);
 
     case ${_options_[0]} in
-        --os )
-            _os['flag']=1;
-            _os['args']=${_options_[@]:1}
+        -O | --os )
+            _os_flag=1;
+            _os_args=(${_options_[@]:1});
             _os_call;
         ;;
-        --docker )
-            _docker['flag']=1;
-            _docker['args']=${_options_[@]:1}
+        -D | --docker )
+            _docker_flag=1;
+            _docker_args=(${_options_[@]:1});
             _docker_call;
         ;;
-        --port )
-            _port['flag']=1;
-            _port['args']=${_options_[@]:1}
+        -P | --port )
+            _port_flag=1;
+            _port_args=(${_options_[@]:1});
             _port_call;
         ;;
         -h | --help )
