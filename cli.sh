@@ -56,36 +56,36 @@ declare -a _port_args=1;
 # __help function
 ################################################################################
 function _os_help(){
-    printf "%-25s %s\n" "-O │ --os" "Os actions:";
-    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'type')" "show / check the name";
-    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'version')" "show / check the version";
-    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'update')" "update the OS";
-    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'info')" "more info about OS";
+    printf "%-25s %s\n" "-O  │ --os" "Os actions:";
+    printf "%-40s %s\n" "    ├── $(colorize 'cyan' 'type')" "show / check the name";
+    printf "%-40s %s\n" "    ├── $(colorize 'cyan' 'version')" "show / check the version";
+    printf "%-40s %s\n" "    ├── $(colorize 'cyan' 'update')" "update the OS";
+    printf "%-40s %s\n" "    ├── $(colorize 'cyan' 'info')" "more info about OS";
 
-    printf "%-40s %s\n" "   └── $(colorize 'cyan' 'info')" "more info about OS";
+    printf "%-40s %s\n" "    └── $(colorize 'cyan' 'info')" "more info about OS";
 }
 
 function _docker_help(){
-    printf "%-25s %s\n" "-D │ --docker" "docker actions";
-    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'install')" "install docker";
-    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'remove')" "uninstall docker";
-    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'compose')" "install docker-compose";
+    printf "%-25s %s\n" "-D  │ --docker" "docker actions";
+    printf "%-40s %s\n" "    ├── $(colorize 'cyan' 'install')" "install docker";
+    printf "%-40s %s\n" "    ├── $(colorize 'cyan' 'remove')" "uninstall docker";
+    printf "%-40s %s\n" "    ├── $(colorize 'cyan' 'compose')" "install docker-compose";
 
-    printf "%-40s %s\n" "   └── $(colorize 'cyan' 'kubectl')" "install kubernetes";
+    printf "%-40s %s\n" "    └── $(colorize 'cyan' 'kubectl')" "install kubernetes";
 }
 
 function _port_help(){
-    printf "%-25s %s\n" "-P │ --port" "manage firewall";
-    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'stop')" "stop all firewalls";
-    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'start')" "start all firewalls";
-    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'disable')" "disable all firewalls";
-    printf "%-40s %s\n" "   ├── $(colorize 'cyan' 'enable')" "enable all firewalls";
+    printf "%-25s %s\n" "-P  │ --port" "manage firewall";
+    printf "%-40s %s\n" "    ├── $(colorize 'cyan' 'stop')" "stop all firewalls";
+    printf "%-40s %s\n" "    ├── $(colorize 'cyan' 'start')" "start all firewalls";
+    printf "%-40s %s\n" "    ├── $(colorize 'cyan' 'disable')" "disable all firewalls";
+    printf "%-40s %s\n" "    ├── $(colorize 'cyan' 'enable')" "enable all firewalls";
 
-    printf "%-40s %s\n" "   └── $(colorize 'yellow' '<NUMBER>')" "open this port";
+    printf "%-40s %s\n" "    └── $(colorize 'yellow' '<NUMBER>')" "open this port";
 }
 
 function _help(){
-    printf "%-25s %s\n" "-h │ --help" "show / print help";
+    printf "%-25s %s\n" "-h  │ --help" "show / print help";
     echo
     echo "$(_os_help)"
     echo
