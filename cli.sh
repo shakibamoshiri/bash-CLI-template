@@ -52,6 +52,7 @@ declare -a _docker_args=();
 declare -i _port_flag=0;
 declare -a _port_args=1;
 
+declare -r CLI_VERSION='1.3.0';
 ################################################################################
 # __help function
 ################################################################################
@@ -86,6 +87,8 @@ function _port_help(){
 
 function _help(){
     printf "%-25s %s\n" "-h  │ --help" "show / print help";
+    printf "%-25s %s\n" "-v  │ --version" "show version";
+    printf "%-25s %s\n" "-vv │ --verbose" "verbose";
     echo
     echo "$(_os_help)"
     echo
@@ -135,6 +138,15 @@ function _port_call(){
     echo "size: '${#_port_args[*]}'";
 }
 
+function _version_call(){
+    echo version: $CLI_VERSION;
+    exit 0;
+}
+
+function _verbose_call(){
+    echo This is --verbose call;
+}
+
 for arg in "${ARGS[@]}"; do
     _options_=($arg);
 
@@ -153,6 +165,12 @@ for arg in "${ARGS[@]}"; do
             _port_flag=1;
             _port_args=(${_options_[@]:1});
             _port_call;
+        ;;
+        -v | --version )
+            _version_call;
+        ;;
+        -vv | --verbose )
+            _verbose_call;
         ;;
         -h | --help )
             _help;
