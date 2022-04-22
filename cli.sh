@@ -117,33 +117,33 @@ if [[ ${#ARGS[@]} == 0 ]]; then
     _help;
 fi
 
-function _os_call(){
-    echo "*** _os_call ***";
+function _os_check(){
+    echo "*** _os_check ***";
     echo "flag: $_os_flag";
     echo "args: '${_os_args[*]}'";
     echo "size: '${#_os_args[*]}'";
 }
 
-function _docker_call(){
-    echo "*** _docker_call ***";
+function _docker_check(){
+    echo "*** _docker_check ***";
     echo "flag: $_docker_flag";
     echo "args: '${_docker_args[*]}'";
     echo "size: '${#_docker_args[*]}'";
 }
 
-function _port_call(){
-    echo "*** _port_call ***";
+function _port_check(){
+    echo "*** _port_check ***";
     echo "flag: $_port_flag";
     echo "args: '${_port_args[*]}'";
     echo "size: '${#_port_args[*]}'";
 }
 
-function _version_call(){
+function _version_check(){
     echo version: $CLI_VERSION;
     exit 0;
 }
 
-function _verbose_call(){
+function _verbose_check(){
     echo This is --verbose call;
 }
 
@@ -154,23 +154,23 @@ for arg in "${ARGS[@]}"; do
         -O | --os )
             _os_flag=1;
             _os_args=(${_options_[@]:1});
-            _os_call;
+            _os_check;
         ;;
         -D | --docker )
             _docker_flag=1;
             _docker_args=(${_options_[@]:1});
-            _docker_call;
+            _docker_check;
         ;;
         -P | --port )
             _port_flag=1;
             _port_args=(${_options_[@]:1});
-            _port_call;
+            _port_check;
         ;;
         -v | --version )
-            _version_call;
+            _version_check;
         ;;
         -vv | --verbose )
-            _verbose_call;
+            _verbose_check;
         ;;
         -h | --help )
             _help;
