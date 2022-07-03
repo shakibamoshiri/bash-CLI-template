@@ -14,7 +14,7 @@ set -o pipefail # exit on pipe failure
 # check for needed commands
 ################################################################################
 function import(){
-    declare -r local command_name=$1;
+    declare -r command_name=$1;
 
     if ! which $command_name > /dev/null 2>&1; then
         echo $command_name not found.
@@ -41,7 +41,6 @@ import perl
 ################################################################################
 declare -r CLI_VERSION='1.0.0';
 declare -r CLI_NAME='<CLI_NAME>';
-declare -r CLI_INSTALL_PATH='/usr/local/bin';
 declare -r PS4='debug($LINENO) ${FUNCNAME[0]:+${FUNCNAME[0]}}(): ';
 
 
@@ -165,7 +164,7 @@ function main(){
 
     case ${1} in
         help | version | encrypt | decrypt )
-            $1 ${@:2};
+            $1 "${@:2}";
         ;;
         * )
             echo "unknown command: $1";
